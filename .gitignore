@@ -1,46 +1,23 @@
-# --- Compiled Java Class Files ---
+# Compiled Java Class Files
 *.class
 
-# Exclude the standard output folders used by IDEs
+# Build output directories
+target/
 bin/
 out/
 build/
 
-# --- Local Configuration / OS Files ---
+# OS specific files
 .DS_Store
 Thumbs.db
 
-# --- IntelliJ IDEA ---
-.idea/
-*.iws
-*.iml
-*.ipr
-
-# --- Eclipse ---
-.classpath
-.project
-.settings/
-.metadata/
-
-# --- NetBeans ---
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-# --- Visual Studio Code ---
-.vscode/
-
-# --- Package Files (Optional) ---
-# You likely won't need to commit these for this project
+# Package Files
 *.jar
 *.war
 *.zip
 *.tar.gz
 *.rar
 
-# --- Project Specifics ---
-# If you create temporary text files during testing, ignore them here
+# Log and temporary files
 *.tmp
 *.log

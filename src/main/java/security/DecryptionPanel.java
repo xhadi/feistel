@@ -176,9 +176,9 @@ public class DecryptionPanel extends JPanel{
         StringBuilder plainToHexBuilder = new StringBuilder();
 
         int start = 0;
-        int end = 2;
+        int end = 4;
 
-        // Process text in 2-character segments
+        // Process text in 4-character segments
         while(cipherText.length() >= end) {
             String segment = cipherText.substring(start, end);
             int segmentInt = TextConversion.textToInt(segment);

@@ -186,8 +186,8 @@ public class EncryptionPanel extends JPanel {
         }
 
         int start = 0;
-        int end = 4;
-        // Process text in 4-character segments
+        int end = 2;
+        // Process text in 2-character segments
         while (plainText.length() >= end) { 
             String segment = plainText.substring(start, end);
             int segmentInt = TextConversion.textToInt(segment);

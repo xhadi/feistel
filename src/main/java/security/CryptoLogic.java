@@ -27,9 +27,6 @@ public class CryptoLogic {
     }
 
     public int encrypt(int plaintext) {
-        // Enforce 16-bit input size by masking
-        plaintext = plaintext & 0xFFFF;
-        
         int ciphertext;
 
         // Split 16-bit block into two 8-bit halves
@@ -77,9 +74,6 @@ public class CryptoLogic {
     }
 
     public int decrypt(int ciphertext) {
-        // Enforce 16-bit input size by masking
-        ciphertext = ciphertext & 0xFFFF;
-        
         int plaintext;
 
         // Split 16-bit block into two 8-bit halves

@@ -27,4 +27,16 @@ public class TextConversion {
     public static int hexStringToInt(String hex) {
         return Integer.parseInt(hex, 16);
     }
+
+    // Converts a full String to a Hex String (for the UI display)
+    public static String stringToHex(String input) {
+        if (input == null) return "";
+        StringBuilder hex = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            // %02X formats the character as 2 Hex digits (e.g., 'A' -> "41")
+            // Use %04X if you want to see the full 16-bit value (e.g., 'A' -> "0041")
+            hex.append(String.format("%02X", (int) c));
+        }
+        return hex.toString();
+    }
 }

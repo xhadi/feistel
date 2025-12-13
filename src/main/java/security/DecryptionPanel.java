@@ -173,7 +173,7 @@ public class DecryptionPanel extends JPanel{
         crypto.setSecondKey(secondKeyInt);
 
         StringBuilder plainTextBuilder = new StringBuilder();
-        StringBuilder plainToHexBuilder = new StringBuilder();
+        String plainToHex;
 
         int start = 0;
         int end = 2;
@@ -185,7 +185,6 @@ public class DecryptionPanel extends JPanel{
             int decryptedSegment = crypto.decrypt(segmentInt);
 
             plainTextBuilder.append(TextConversion.intToText(decryptedSegment));
-            plainToHexBuilder.append(TextConversion.intToHexString(decryptedSegment));
             
             start += 2;
             end += 2;
@@ -197,12 +196,13 @@ public class DecryptionPanel extends JPanel{
             int segmentInt = TextConversion.textToInt(segment);
             int decryptedSegment = crypto.decrypt(segmentInt);
             plainTextBuilder.append(TextConversion.intToText(decryptedSegment));
-            plainToHexBuilder.append(TextConversion.intToHexString(decryptedSegment));
         }
 
+
+        plainToHex = TextConversion.stringToHex(plainTextBuilder.toString());
         // Convert builder back to String for display
         plainTextField.setText(plainTextBuilder.toString());
-        plainToHexField.setText(plainToHexBuilder.toString());
+        plainToHexField.setText(plainToHex);
     }
 
     /*
@@ -228,18 +228,10 @@ public class DecryptionPanel extends JPanel{
         }
 
         private void updateTextField(){
-            String text, hex;
-            int binText;
-
-            text = cipherTextField.getText();
-            if (text.isEmpty()) { // Handle empty text safely
-                cipherToHexField.setText("");
-                return;
-            }
-            binText = TextConversion.textToInt(text);
-
-            hex = TextConversion.intToHexString(binText);
-            cipherToHexField.setText(hex);
+            String currentTxt, hexResult;
+            currentTxt = cipherTextField.getText();
+            hexResult = TextConversion.stringToHex(currentTxt);
+            cipherToHexField.setText(hexResult);
         }
     }
 }

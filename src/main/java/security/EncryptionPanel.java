@@ -178,7 +178,7 @@ public class EncryptionPanel extends JPanel {
     private void encrypt() {
         String plainText;
         StringBuilder cipherTextBuilder = new StringBuilder();
-        StringBuilder cipherToHexBuilder = new StringBuilder();
+        String ciphrtToHex;
 
         if(firstKeyField.getText().isEmpty() || secondKeyField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter both keys.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -208,7 +208,6 @@ public class EncryptionPanel extends JPanel {
             
             // Append to the StringBuilder
             cipherTextBuilder.append(TextConversion.intToText(encryptedSegment));
-            cipherToHexBuilder.append(TextConversion.intToHexString(encryptedSegment));
 
             start += 2;
             end += 2;
@@ -221,12 +220,13 @@ public class EncryptionPanel extends JPanel {
             int segmentInt = TextConversion.textToInt(segment); 
             int encryptedSegment = crypto.encrypt(segmentInt);
             cipherTextBuilder.append(TextConversion.intToText(encryptedSegment));
-            cipherToHexBuilder.append(TextConversion.intToHexString(encryptedSegment));
         }
 
+        ciphrtToHex = TextConversion.stringToHex(cipherTextBuilder.toString());
+        
         // Convert builder back to String for display
         cipherTextField.setText(cipherTextBuilder.toString());
-        cipherToHexField.setText(cipherToHexBuilder.toString());
+        cipherToHexField.setText(ciphrtToHex);
     }
 
     /*
@@ -252,18 +252,10 @@ public class EncryptionPanel extends JPanel {
         }
 
         private void updateHexField(){
-            String text, hex;
-            int binText;
-
-            text = plainTextField.getText();
-            if (text.isEmpty()) { // Handle empty text safely
-                plainToHexField.setText("");
-                return;
-            }
-            binText = TextConversion.textToInt(text);
-
-            hex = TextConversion.intToHexString(binText);
-            plainToHexField.setText(hex);
+            String currentTxt, hexResult;
+            currentTxt = plainTextField.getText();
+            hexResult = TextConversion.stringToHex(currentTxt);
+            plainToHexField.setText(hexResult);
         }
     }
 }

@@ -13,9 +13,9 @@ public class CryptoLogic {
     public void generateRandomKeys() {
         Random random = new Random();
         
-        // Key size = 16 bits (0 to 65535)
-        this.firstKey = random.nextInt(65536); 
-        this.secondKey = random.nextInt(65536); 
+        // Key size = 8 bits (0 to 255)
+        this.firstKey = random.nextInt(256); 
+        this.secondKey = random.nextInt(256); 
     }
 
     /*
@@ -37,18 +37,13 @@ public class CryptoLogic {
             int roundKey = (i % 2 == 1) ? firstKey : secondKey;
 
             // Step A: Apply Function F
-            // F(R, K) = Rotate(R) XOR CompressedKey
+            // F(R, K) = Rotate(R) XOR K
             
             // 1. Shift (Rotate Left by 1)
             int shiftedRight = rotateLeft8Bit(right);
             
-            // 2. XOR with Key
-            // Since the Right half is 8-bit but the Key is 16-bit, we "fold" the key 
-            // by XORing its high 8 bits with its low 8 bits. 
-            // This ensures the full 16-bit key is used without changing the block size.
-            int key8Bit = ((roundKey >> 8) & 0xFF) ^ (roundKey & 0xFF);
-            
-            int f_result = shiftedRight ^ key8Bit;
+            // 2. XOR with 8-bit Key
+            int f_result = shiftedRight ^ roundKey;
 
             // Step B: XOR with Left to get New Right
             int newRight = left ^ f_result;
@@ -83,13 +78,14 @@ public class CryptoLogic {
         for(int i = 4; i >= 1; i--) {
             int roundKey = (i % 2 == 1) ? firstKey : secondKey;
 
+            // Step A: Apply Function F
+            // F(R, K) = Rotate(R) XOR K
+            
             // 1. Shift (Rotate Left by 1)
             int shiftedRight = rotateLeft8Bit(right);
             
-            // 2. XOR with Key (Folded to 8 bits)
-            int key8Bit = ((roundKey >> 8) & 0xFF) ^ (roundKey & 0xFF);
-            
-            int f_result = shiftedRight ^ key8Bit;
+            // 2. XOR with 8-bit Key
+            int f_result = shiftedRight ^ roundKey;
 
             // Step B: XOR with Left to get New Right
             int newRight = left ^ f_result;

@@ -82,10 +82,12 @@ public class EncryptionPanel extends JPanel {
         middlePanel.add(keysLabel);
 
         firstKeyField = new JTextField(10);
+        firstKeyField.setText("First Key on Hex, Ex: 00A4");
         firstKeyField.setFont(new Font("Monospaced", Font.PLAIN, 14));
         middlePanel.add(firstKeyField);
 
         secondKeyField = new JTextField(10);
+        secondKeyField.setText("Second Key on Hex, Ex: 003F");
         secondKeyField.setFont(new Font("Monospaced", Font.PLAIN, 14));
         middlePanel.add(secondKeyField);
 
@@ -178,6 +180,17 @@ public class EncryptionPanel extends JPanel {
         StringBuilder cipherTextBuilder = new StringBuilder();
         StringBuilder cipherToHexBuilder = new StringBuilder();
 
+        if(firstKeyField.getText().isEmpty() || secondKeyField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter both keys.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int firstKey = TextConversion.hexStringToInt(firstKeyField.getText());
+        int secondKey = TextConversion.hexStringToInt(secondKeyField.getText());
+
+        crypto.setFirstKey(firstKey);
+        crypto.setSecondKey(secondKey);
+
         plainText = plainTextField.getText();
         if (plainText.isEmpty()) {
             cipherTextField.setText("");
@@ -187,7 +200,7 @@ public class EncryptionPanel extends JPanel {
 
         int start = 0;
         int end = 2;
-        // Process text in 2-character segments
+        // Process text in 2-character segment
         while (plainText.length() >= end) { 
             String segment = plainText.substring(start, end);
             int segmentInt = TextConversion.textToInt(segment);

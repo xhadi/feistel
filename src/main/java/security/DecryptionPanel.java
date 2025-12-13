@@ -76,16 +76,18 @@ public class DecryptionPanel extends JPanel{
         middlePanel.setBackground(Color.decode("#2B2B2B"));
         middlePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        keysLabel = new JLabel("Keys:");
+        keysLabel = new JLabel("Decryption Keys:");
         keysLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
         keysLabel.setForeground(Color.WHITE);
         middlePanel.add(keysLabel);
 
         firstKeyField = new JTextField(10);
+        firstKeyField.setText("First Key on Hex, Ex: 00A4");
         firstKeyField.setFont(new Font("Monospaced", Font.PLAIN, 14));
         middlePanel.add(firstKeyField);
 
         secondKeyField = new JTextField(10);
+        secondKeyField.setText("Second Key on Hex, Ex: 003F");
         secondKeyField.setFont(new Font("Monospaced", Font.PLAIN, 14));
         middlePanel.add(secondKeyField);
 
@@ -157,17 +159,15 @@ public class DecryptionPanel extends JPanel{
 
     private void decryptText() {
         String cipherText = cipherTextField.getText();
-        String firstKey = firstKeyField.getText();
-        String secondKey = secondKeyField.getText();
 
-        if(firstKey.isEmpty() || secondKey.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter both keys.");
+        if(firstKeyField.getText().isEmpty() || secondKeyField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter both keys.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Parse hex strings to integers
-        int firstKeyInt = Integer.parseInt(firstKey, 16);
-        int secondKeyInt = Integer.parseInt(secondKey, 16);
+        int firstKeyInt = TextConversion.hexStringToInt(firstKeyField.getText());
+        int secondKeyInt = TextConversion.hexStringToInt(secondKeyField.getText());
 
         crypto.setFirstKey(firstKeyInt);
         crypto.setSecondKey(secondKeyInt);

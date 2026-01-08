@@ -85,12 +85,12 @@ public class EncryptionPanel extends JPanel {
         middlePanel.add(keysLabel);
 
         firstKeyField = new JTextField(10);
-        firstKeyField.setText("First Key on Hex, Ex: 00A4");
+        firstKeyField.setText("First Key on Hex, Ex: A4");
         firstKeyField.setFont(new Font("Monospaced", Font.PLAIN, 14));
         middlePanel.add(firstKeyField);
 
         secondKeyField = new JTextField(10);
-        secondKeyField.setText("Second Key on Hex, Ex: 003F");
+        secondKeyField.setText("Second Key on Hex, Ex: 3F");
         secondKeyField.setFont(new Font("Monospaced", Font.PLAIN, 14));
         middlePanel.add(secondKeyField);
 

@@ -34,6 +34,7 @@ public class CryptoLogic {
         int right = plaintext & 0xFF;
 
         for(int i = 1; i <= 4; i++) {
+            // roundKey selection based on round number
             int roundKey = (i % 2 == 1) ? firstKey : secondKey;
 
             // Step A: Apply Function F

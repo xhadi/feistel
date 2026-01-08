@@ -18,12 +18,12 @@ public class TextConversion {
         return new String(chars);
     }
 
-    // Converts a 16-bit integer to a 4-digit hexadecimal string
+    // Converts a 16-bit integer to a 2-character hexadecimal string
     public static String intToHexString(int value) {
-        return String.format("%04X", value);
+        return String.format("%02X", value);
     }
 
-    // Converts a 4-digit hexadecimal string to a 16-bit integer
+    // Converts a 2-character hexadecimal string to a 16-bit integer
     public static int hexStringToInt(String hex) {
         return Integer.parseInt(hex, 16);
     }
